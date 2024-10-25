@@ -1,0 +1,103 @@
+// ==========================================================================
+// f-mixin
+// ==========================================================================
+
+// -----------------------------------------------------------------
+// media query
+// -----------------------------------------------------------------
+
+// $breakpoints: (
+// 	'xl-pc': 'only screen and (min-width:1441px)',
+// 	'pc': 'only screen and (min-width:768px)',
+// 	'sp': 'only screen and (max-width:767px)',
+// 	) !default;
+
+// @mixin mq($breakpoint: pc) {
+// 	@media #{map-get($breakpoints, $breakpoint)} {
+// 		@content;
+// 	}
+// }
+$breakpoints: (
+	'xl-pc': 'only screen and (min-width:1441px)',
+	// 'pc': 'only screen and (min-width:768px)',
+	's-pc': '(max-width:1280px)',
+	'b1100': '(max-width:1100px)',
+	'xs-pc': '(max-width:960px)',
+	'sp': '(max-width: 768px)',
+	'hover': '(any-hover:hover)',
+	) !default;
+
+@mixin mq($breakpoint: pc) {
+	@media #{map-get($breakpoints, $breakpoint)} {
+		@content;
+	}
+}
+
+
+// sort
+// --------------------------------------------
+
+@include mq('xl-pc') {
+	/* 1441px以上 */
+}
+
+@include mq('s-pc') {
+	/* 1280px以下 */
+}
+
+@include mq('b1100') {
+	/* 1100px以下 */
+}
+
+@include mq('xs-pc') {
+	/* 960px以下 */
+}
+
+@include mq('sp') {
+	/* 768px以下 */
+}
+
+@include mq('hover') {
+	/* hover action */
+}
+
+
+
+// -----------------------------------------------------------------
+// linear-gradient
+// -----------------------------------------------------------------
+
+@mixin linear-gradient($to, $color-start, $color-end) {
+	background: linear-gradient(to $to, $color-start 0%, $color-end 100%
+	);
+}
+
+// -----------------------------------------------------------------
+// lineheight-crop
+// -----------------------------------------------------------------
+
+@mixin lineheight-crop($line-height) {
+	&::before {
+		display: block;
+		content: "";
+		margin-top: calc((1 - #{$line-height}) * 0.5em);
+	}
+
+	&::after {
+		display: block;
+		content: "";
+		margin-bottom: calc((1 - #{$line-height}) * 0.5em);
+	}
+}
+
+// -----------------------------------------------------------------
+// user-select
+// -----------------------------------------------------------------
+
+@mixin user-select($status) {
+	-ms-user-select: $status;
+	-moz-user-select: -moz-$status;
+	-khtml-user-select: $status;
+	-webkit-user-select: $status;
+	user-select: $status;
+}

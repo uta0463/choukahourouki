@@ -1,0 +1,16 @@
+// ==========================================================================
+// foundation
+// ==========================================================================
+
+@import '@/app/styles/foundation/_variable';
+@import '@/app/styles/foundation/_mixin';
+
+.l-main {
+  padding-top: 40px;
+}
+
+
+@include mq('sp') {
+  .l-main {
+  }
+}

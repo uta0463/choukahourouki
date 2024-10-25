@@ -1,0 +1,53 @@
+// ==========================================================================
+// foundation
+// ==========================================================================
+
+@import '@/app/styles/foundation/_variable';
+@import '@/app/styles/foundation/_mixin';
+
+
+.l-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px 0;
+  background-color: var(--color-bg-white);
+  border-bottom: solid 1px var(--color-line-base);
+  z-index: 100;
+
+  &__outer {
+    width: calc(100% - 40px);
+    margin-inline: auto;
+  }
+
+  &__inner {
+    max-width: var(--content-base);
+    margin-inline: auto;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  &__logo {}
+
+  &__ctrl {}
+}
+
+
+@include mq('sp') {
+  .l-header {
+    padding: 4.5px 0;
+    
+    &__logo {
+      img {
+        width: 40px;
+        height: auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+// ==========================================================================
+// foundation
+// ==========================================================================
+
+@import '@/app/styles/foundation/_variable';
+@import '@/app/styles/foundation/_mixin';
+
+
+.l-footer {
+  padding: 40px 0;
+  background-color: var(--color-bg-gray);
+
+  &__outer {
+    width: calc(100% - 40px);
+    margin-inline: auto;
+  }
+
+  &__inner {
+    max-width: var(--content-base);
+    margin-inline: auto;
+  }
+
+  &__copyright {
+    font-size: 12px;
+    font-weight: 200;
+    letter-spacing: .03em;
+    line-height: 1.2;
+    text-align: center;
+  }
+}
+
+
+@include mq('sp') {
+  .l-footer {
+  }
+}

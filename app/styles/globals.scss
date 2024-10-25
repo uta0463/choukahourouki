@@ -1,0 +1,72 @@
+// ==========================================================================
+// foundation
+// ==========================================================================
+
+@import '@/app/styles/foundation/_variable';
+@import '@/app/styles/foundation/_mixin';
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  --color-text-base: #000;
+  --color-text-gray: #787878;
+
+  --color-bg-black: #000;
+  --color-bg-white: #fff;
+  --color-bg-offwhite: #f7f7f7;
+  --color-bg-gray: #f0f0f0;
+  
+  --color-line-base: #dcdcdc;
+
+  --content-base: 880px;
+  --base-padding: 20px;
+}
+
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     --background: #0a0a0a;
+//     --foreground: #ededed;
+//   }
+// }
+
+@layer base {
+  body {
+    @apply font-custom;
+  }
+}
+
+body {
+  // color: var(--foreground);
+  // background: var(--background);
+  // font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+	padding: 0;
+	color: var(--color-text-base);
+	// font-family: var(--font-family-base);
+	font-weight: normal;
+	line-height: 1.8;
+	overflow-wrap: anywhere; /* 収まらない場合に折り返す */
+  word-break: normal; /* 単語の分割はデフォルトに依存 */
+  line-break: strict; /* 禁則処理を厳格に適用 */
+}
+
+ul {
+	li {
+		list-style: none;
+	}
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	vertical-align: middle;
+	display: block;
+}
+
+

@@ -1,0 +1,66 @@
+// ==========================================================================
+// foundation
+// ==========================================================================
+
+@import '@/app/styles/foundation/_variable';
+@import '@/app/styles/foundation/_mixin';
+
+.l-nav {
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__item {
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+
+@include mq('sp') {
+  .l-nav {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 40px 20px;
+    background-color: var(--color-bg-offwhite);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &__menu {
+      // padding: 24px 0;
+      background-color: var(--color-bg-white);
+      border-radius: 8px;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    &__item {
+      width: 100%;
+      font-size: 16px;
+      text-align: center;
+
+      & + .l-nav__item {
+        border-top: solid 1px var(--color-line-base);
+      }
+
+      & > a {
+        padding: 20px;
+        display: block;
+      }
+    }
+  }
+
+  // menu open
+  :global(body.is-open) {
+    .l-nav {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
