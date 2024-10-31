@@ -1,15 +1,32 @@
+import { notFound } from "next/navigation";
 import { getPostList, getCategoryList } from "@/app/_libs/microcms"
-import { POST_LIST_LIMIT, TOP_POST_LIMIT } from "@/app/_constants"
+import { POST_LIST_LIMIT } from "@/app/_constants"
 import PostList from "@/app/_components/PostList"
 import CategoryList from "@/app/_components/CategoryList"
 import styles from './page.module.scss'
 import categoryStyles from "@/app/_components/CategoryList/index.module.scss"
 
-const Home = async () => {
-  const postData = await getPostList({ limit: TOP_POST_LIMIT });
-
-  const fullData = await getPostList({ limit: POST_LIST_LIMIT });
+export async function generateStaticParams() {
   const categoryData = await getCategoryList();
+  return categoryData.contents.map((category) => ({
+    id: category.id,
+  }));
+}
+
+const CategoryPage = async ({ params: rawParams }: { params: { id: string } }) => {
+  const params = await rawParams;
+  const { id } = params;
+  // カテゴリーの存在確認
+  const categoryData = await getCategoryList();
+  const category = categoryData.contents.find((cat) => cat.id === id);
+
+  if (!category) {
+    notFound(); // カテゴリーが存在しない場合は 404 ページに遷移
+  }
+
+  // 特定カテゴリーの投稿を取得
+  const postData = await getPostList({ filters: `category[equals]${id}` });
+  const fullData = await getPostList({ limit: POST_LIST_LIMIT });
 
   // 投稿で使用されているカテゴリー名を抽出し、投稿数を計算
   const categoryCountMap = fullData.contents.reduce((acc, post) => {
@@ -29,9 +46,10 @@ const Home = async () => {
     .filter((category) => category.count > 0);
 
   return (
-    <>
-      <section className={styles.section}>
-        <h2 className={styles.heading}>最近の釣果</h2>
+    <div className={styles.container}>
+
+      <section className={styles.contents}>
+        <h1 className={styles.heading}>{category.name}の釣果</h1>
         <PostList posts={postData.contents} />
       </section>
 
@@ -43,8 +61,8 @@ const Home = async () => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
 
-export default Home;
+export default CategoryPage;

@@ -1,0 +1,39 @@
+// ==========================================================================
+// foundation
+// ==========================================================================
+
+@import '@/app/styles/foundation/_variable';
+@import '@/app/styles/foundation/_mixin';
+
+
+.container {
+  margin-top: 40px;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.item {
+  font-size: 15px;
+}
+
+.section {
+  margin-top: 80px;
+  padding: 60px 0;
+  background-color: var(--color-bg-gray);
+}
+
+.heading {
+  font-size: 26px;
+  text-align: center;
+}
+
+
+@include mq('sp') {
+  .section {
+    padding: 40px 0;
+  }
+}

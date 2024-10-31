@@ -1,18 +1,18 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import Nav from '@/app/components/nav'
-import Hamburger from '@/app/components/hamburger'
+import Nav from '@/app/_components/Nav'
+import Hamburger from '@/app/_components/Hamburger'
 
-import header from '@/app/styles/layout/Header.module.scss'
+import styles from './index.module.scss'
 
 export default function Header() {
   return (
-    <header className={header['l-header']}>
-      <div className={header['l-header__outer']}>
-        <div className={header['l-header__inner']}>
-          <div className={header['l-header__row']}>
-            <h1 className={header['l-header__logo']}>
+    <header className={styles['l-header']}>
+      <div className={styles['l-header__outer']}>
+        <div className={styles['l-header__inner']}>
+          <div className={styles['l-header__row']}>
+            <h1 className={styles['l-header__logo']}>
               <Link href="/">
                 <Image
                   src="/logo.svg"
@@ -23,7 +23,7 @@ export default function Header() {
                 />
               </Link>
             </h1>
-            <div className={header['l-header__ctrl']}>
+            <div className={styles['l-header__ctrl']}>
               <Nav />
               <Hamburger />
             </div>

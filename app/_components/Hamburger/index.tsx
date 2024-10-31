@@ -1,8 +1,9 @@
 "use client"; // クライアントコンポーネントであることを宣言
 
 import { useState, useEffect } from 'react'
-import { BodyFix } from '@/app/components/_utils/bodyfix';
-import hamburger from '@/app/styles/object/component/Hamburger.module.scss'
+import { BodyFix } from '@/app/_libs/bodyfix';
+
+import styles from './index.module.scss'
 
 export default function Hamburger() {
   const [isOpen, setIsOpen] = useState(false)
@@ -25,8 +26,8 @@ export default function Hamburger() {
   }, [])
 
   return (
-    <button type="button" className={hamburger.btn} onClick={handleClick}>
-      <span className={hamburger.bars}>
+    <button type="button" className={styles.btn} onClick={handleClick}>
+      <span className={styles.bars}>
         <span></span>
         <span></span>
         <span></span>

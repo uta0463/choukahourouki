@@ -1,4 +1,4 @@
-import { BodyFix } from '@/app/components/_utils/bodyfix';
+import { BodyFix } from '@/app/_libs//bodyfix';
 
 export default class Anchor {
   private static breakpoint = 768; // 768pxのブレークポイントを設定

@@ -5,12 +5,13 @@
 @import '@/app/styles/foundation/_variable';
 @import '@/app/styles/foundation/_mixin';
 
-.l-main {
-  padding-top: 40px;
+.container {}
+
+.contents {}
+
+.heading {
+  font-size: 26px;
 }
 
-
 @include mq('sp') {
-  .l-main {
-  }
 }

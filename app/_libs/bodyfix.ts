@@ -31,8 +31,15 @@ export class BodyFix {
 
   static unlock() {
     if (!BodyFix.flag && BodyFix.body && BodyFix.html) {
-      BodyFix.html.style.height = 'auto';
-      BodyFix.body.style.position = 'static';
+      // BodyFix.html.style.height = 'auto';
+      // BodyFix.body.style.position = 'static';
+
+      BodyFix.html.style.height = '';
+      BodyFix.body.style.position = '';
+      BodyFix.body.style.top = '';
+      BodyFix.body.style.left = '';
+      BodyFix.body.style.right = '';
+      BodyFix.body.style.zIndex = '';
 
       setTimeout(() => {
         BodyFix.body?.classList.remove('is-locked');

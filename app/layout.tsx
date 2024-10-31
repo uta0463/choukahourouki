@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
-import "./styles/globals.scss";
+// import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "釣果放浪記",
-  description: "釣果情報になります。",
-};
+import Sheet from '@/app/_components/Sheet'
+
+// export const metadata: Metadata = {
+//   title: "釣果放浪記",
+//   description: "釣果情報になります。",
+// };
 
 export default function RootLayout({
   children,
@@ -14,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
-        {children}
+        <Sheet>
+          { children }
+        </Sheet>
       </body>
     </html>
   );

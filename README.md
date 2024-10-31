@@ -38,6 +38,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Github push
 git add .
-git add <ファイル名>
-git commit -m "あなたのコミットメッセージ"
+git commit -m "コメント"
 git push origin main
