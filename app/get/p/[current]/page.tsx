@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { getPostList, getCategoryList } from "@/app/_libs/microcms"
 import { POST_LIST_LIMIT, CATEGORY_LIST_LIMIT } from "@/app/_constants"
 import PostList from "@/app/_components/PostList"
@@ -6,13 +7,29 @@ import Pagination from "@/app/_components/Pagination"
 import styles from './page.module.scss'
 import categoryStyles from "@/app/_components/CategoryList/index.module.scss"
 
-const Page = async () => {
-  // const postData = await getPostList({
-  //   limit: POST_LIST_LIMIT
-  // });
+type Props = {
+  params: Promise<{
+    current: string;
+  }>;
+}
+
+export default async function Page({ params }: Props) {
+  const { current: currentStr } = await params;
+  const current = parseInt(currentStr, 10);
+
+  if(Number.isNaN(current) || current < 1) {
+    notFound();
+  }
+
   const { contents: postData, totalCount } = await getPostList({
-    limit: CATEGORY_LIST_LIMIT
+    limit: CATEGORY_LIST_LIMIT,
+    offset: CATEGORY_LIST_LIMIT * (current - 1)
   });
+
+  if(postData.length === 0) {
+    notFound();
+  }
+
   const fullData = await getPostList({ limit: POST_LIST_LIMIT });
   const categoryData = await getCategoryList();
 
@@ -39,7 +56,7 @@ const Page = async () => {
       <section className={styles.contents}>
         <h1 className={styles.heading}>釣果</h1>
         <PostList posts={postData} />
-        <Pagination totalCount={totalCount} />
+        <Pagination totalCount={totalCount} current={current} />
       </section>
 
       <section id="category" className={`${categoryStyles.section} l-wrapper__over`}>
@@ -53,5 +70,3 @@ const Page = async () => {
     </div>
   )
 }
-
-export default Page;

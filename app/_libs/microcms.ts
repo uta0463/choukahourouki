@@ -49,7 +49,7 @@ const client = axios.create({
 
 export const getPostList = async (queries?: MicroCMSQueries) => {
   try {
-    const response = await client.get<{ contents: Post[] }>("/chouka", {
+    const response = await client.get<{ contents: Post[]; totalCount: number }>("/chouka", {
       params: queries,
     });
     return response.data;

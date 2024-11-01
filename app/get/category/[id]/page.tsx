@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { getPostList, getCategoryList } from "@/app/_libs/microcms"
-import { POST_LIST_LIMIT } from "@/app/_constants"
-import PostList from "@/app/_components/PostList"
+import { POST_LIST_LIMIT, CATEGORY_LIST_LIMIT } from "@/app/_constants"
+import PostCategoryList from "@/app/_components/PosCategorytList"
 import CategoryList from "@/app/_components/CategoryList"
 import styles from './page.module.scss'
 import categoryStyles from "@/app/_components/CategoryList/index.module.scss"
@@ -21,6 +21,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: Props) {
   const { id } = await params;
+
   // カテゴリーの存在確認
   const categoryData = await getCategoryList();
   const category = categoryData.contents.find((cat) => cat.id === id);
@@ -30,7 +31,10 @@ export default async function Page({ params }: Props) {
   }
 
   // 特定カテゴリーの投稿を取得
-  const postData = await getPostList({ filters: `category[equals]${id}` });
+  const postData = await getPostList({
+    limit: CATEGORY_LIST_LIMIT,
+    filters: `category[equals]${id}`
+  });
   const fullData = await getPostList({ limit: POST_LIST_LIMIT });
 
   // 投稿で使用されているカテゴリー名を抽出し、投稿数を計算
@@ -54,8 +58,8 @@ export default async function Page({ params }: Props) {
     <div className={styles.container}>
 
       <section className={styles.contents}>
-        <h1 className={styles.heading}>{category.name}の釣果</h1>
-        <PostList posts={postData.contents} />
+        <h1 className={styles.heading}>{category.name}</h1>
+        <PostCategoryList posts={postData.contents} />
       </section>
 
       <section id="category" className={`${categoryStyles.section} l-wrapper__over`}>

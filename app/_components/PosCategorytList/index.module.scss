@@ -1,0 +1,83 @@
+// ==========================================================================
+// foundation
+// ==========================================================================
+
+@import '@/app/styles/foundation/_variable';
+@import '@/app/styles/foundation/_mixin';
+
+.container {
+  margin-top: 60px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+
+.col {
+  width: calc(100% / 2 - 60px + 60px / 2);
+}
+
+.item {
+
+  &__wrap {}
+
+  &__head {}
+
+  &__body {
+    padding-top: 4px;
+    padding-bottom: 8px;
+  }
+
+  &__img {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__date {
+    color: var(--color-text-gray);
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  
+  &__label {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+}
+
+@include mq('sp') {
+  .container {
+    margin-top: 40px;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 80px;
+  }
+  
+  .col {
+    width: 100%;
+  }
+
+  .item {
+
+    &__head {
+      width: calc(100% + 40px);
+      margin-left: -20px;
+    }
+  }
+}
