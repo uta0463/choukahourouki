@@ -13,6 +13,9 @@ type Props = {
   }>;
 }
 
+// ISRを適用
+export const revalidate = 1;
+
 export default async function Page({ params }: Props) {
   const { current: currentStr } = await params;
   const current = parseInt(currentStr, 10);

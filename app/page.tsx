@@ -5,6 +5,9 @@ import CategoryList from "@/app/_components/CategoryList"
 import styles from './page.module.scss'
 import categoryStyles from "@/app/_components/CategoryList/index.module.scss"
 
+// ISRを適用
+export const revalidate = 60;
+
 const Home = async () => {
   const postData = await getPostList({ limit: TOP_POST_LIMIT });
 
