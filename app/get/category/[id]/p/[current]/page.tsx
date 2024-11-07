@@ -10,6 +10,7 @@ import categoryStyles from "@/app/_components/CategoryList/index.module.scss"
 type Props = {
   params: Promise<{
     id: string;
+    current: string;
   }>;
 }
 
@@ -22,6 +23,12 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: Props) {
   const { id } = await params;
+  const { current: currentStr } = await params;
+  const current = parseInt(currentStr, 10);
+
+  if(Number.isNaN(current) || current < 1) {
+    notFound();
+  }
 
   // カテゴリーの存在確認
   const categoryData = await getCategoryList();
@@ -35,6 +42,7 @@ export default async function Page({ params }: Props) {
   const { contents: postData, totalCount } = await getPostList({
     limit: CATEGORY_LIST_LIMIT,
     filters: `category[equals]${id}`,
+    offset: CATEGORY_LIST_LIMIT * (current - 1)
   });
 
   const fullData = await getPostList({ limit: POST_LIST_LIMIT });
@@ -62,7 +70,7 @@ export default async function Page({ params }: Props) {
       <section className={styles.contents}>
         <h1 className={styles.heading}>{category.name}</h1>
         <PostCategoryList posts={postData} />
-        <Pagination totalCount={totalCount} basePath={`/get/category/${category.id}`} />
+        <Pagination totalCount={totalCount} current={current} basePath={`/get/category/${category.id}`} />
       </section>
 
       <section id="category" className={`${categoryStyles.section} l-wrapper__over`}>

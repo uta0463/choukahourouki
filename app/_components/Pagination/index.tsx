@@ -6,9 +6,14 @@ import styles from './index.module.scss'
 type Props = {
   totalCount: number;
   current?: number;
+  basePath?: string;
 };
 
-export default function Pagination({ totalCount, current = 1 }: Props) {
+export default function Pagination({
+    totalCount,
+    current = 1,
+    basePath = "/get",
+  }: Props) {
   const pages = Array.from({
     length: Math.ceil(totalCount / CATEGORY_LIST_LIMIT)
   },
@@ -21,7 +26,7 @@ export default function Pagination({ totalCount, current = 1 }: Props) {
         {pages.map((p) => (
           <li className={styles.item} key={p}>
             {current !== p ? (
-              <Link href={`/get/p/${p}`}>
+              <Link href={`${basePath}/p/${p}`}>
                 {p}
               </Link>
             ) : (

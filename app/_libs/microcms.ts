@@ -76,7 +76,7 @@ export const getPostDetail = async (
 
 export const getCategoryList = async (queries?: MicroCMSQueries) => {
   try {
-    const response = await client.get<{ contents: Category[] }>("/categories", {
+    const response = await client.get<{ contents: Category[]; totalCount: number  }>("/categories", {
       params: queries,
     });
     return response.data;

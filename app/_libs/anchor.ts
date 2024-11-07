@@ -37,8 +37,6 @@ export default class Anchor {
       const headerHeight = window.innerWidth <= this.breakpoint ? this.spHeaderHeight : this.pcHeaderHeight; // 画面幅に応じてヘッダーの高さを設定
       const position = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
 
-      console.log(position)
-
       // bodyにis-openクラスが付与されているかをチェック
       if (document.body.classList.contains('is-open')) {
         BodyFix.unlock() // unlockメソッドを呼び出す

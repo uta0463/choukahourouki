@@ -7,9 +7,6 @@ import styles from './page.module.scss'
 import categoryStyles from "@/app/_components/CategoryList/index.module.scss"
 
 const Page = async () => {
-  // const postData = await getPostList({
-  //   limit: POST_LIST_LIMIT
-  // });
   const { contents: postData, totalCount } = await getPostList({
     limit: CATEGORY_LIST_LIMIT
   });
