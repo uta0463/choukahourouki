@@ -85,3 +85,33 @@ export const getCategoryList = async (queries?: MicroCMSQueries) => {
     throw error;
   }
 };
+
+export const getAllPostList = async () => {
+  let allPosts: Post[] = [];
+  let offset = 0;
+  const limit = 100; // 一度に取得する上限数（microCMSのAPI制限による）
+
+  while (true) {
+    try {
+      const response = await client.get<{ contents: Post[]; totalCount: number }>("/chouka", {
+        params: {
+          offset,
+          limit,
+        },
+      });
+      
+      allPosts = allPosts.concat(response.data.contents);
+      
+      if (allPosts.length >= response.data.totalCount) {
+        break;
+      }
+      
+      offset += limit;
+    } catch (error) {
+      console.error("Error fetching all posts:", error);
+      throw error;
+    }
+  }
+
+  return allPosts;
+};

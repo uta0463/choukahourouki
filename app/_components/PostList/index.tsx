@@ -35,14 +35,12 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
                 <div className={styles.item__head}>
                   {post.eyecatch && (
                   <figure className={styles.item__img}>
-                    {/* <img
-                      src={post.eyecatch.url}
-                    /> */}
                     <Image
                       src={post.eyecatch?.url || ''}
                       alt="アイキャッチ画像"
                       width={410} // 適切な幅を指定
                       height={230} // 適切な高さを指定
+                      priority
                       // layout="responsive" // 自動サイズ調整
                     />
                   </figure>
