@@ -29,6 +29,11 @@ export type Category = {
   name: string;
 } & MicroCMSListContent;
 
+export type Area = {
+  id: string;
+  name: string;
+} & MicroCMSListContent;
+
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
   throw new Error("MICROCMS_SERVICE_DOMAIN is required");
 }
@@ -114,4 +119,17 @@ export const getAllPostList = async () => {
   }
 
   return allPosts;
+};
+
+
+export const getAreaList = async (queries?: MicroCMSQueries) => {
+  try {
+    const response = await client.get<{ contents: Area[]  }>("/place", {
+      params: queries,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    throw error;
+  }
 };

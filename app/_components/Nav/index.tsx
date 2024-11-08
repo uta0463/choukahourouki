@@ -18,9 +18,9 @@ export default function Nav() {
         <li className={styles['l-nav__item']}>
           <Link href="/get/">釣果</Link>
         </li>
-        {/* <li className={styles['l-nav__item']}>
-          <Link href="/map/">エリア</Link>
-        </li> */}
+        <li className={styles['l-nav__item']}>
+          <Link href="/area/">エリア</Link>
+        </li>
       </ul>
     </nav>
   )

@@ -1,35 +1,21 @@
-import { notFound } from "next/navigation";
-import { getPostList, getCategoryList } from "@/app/_libs/microcms"
-import { POST_LIST_LIMIT, CATEGORY_LIST_LIMIT } from "@/app/_constants"
-import PostList from "@/app/_components/PostList"
+import { getPostList, getCategoryList, getAreaList } from "@/app/_libs/microcms"
+import { POST_LIST_LIMIT } from "@/app/_constants"
+import AreaList from "@/app/_components/AreaList"
 import CategoryList from "@/app/_components/CategoryList"
-import Pagination from "@/app/_components/Pagination"
 import styles from './page.module.scss'
 import categoryStyles from "@/app/_components/CategoryList/index.module.scss"
 
-type Props = {
-  params: Promise<{
-    current: string;
-  }>;
-}
-
-export default async function Page({ params }: Props) {
-  const { current: currentStr } = await params;
-  const current = parseInt(currentStr, 10);
-
-  if(Number.isNaN(current) || current < 1) {
-    notFound();
-  }
-
-  const { contents: postData, totalCount } = await getPostList({
-    limit: CATEGORY_LIST_LIMIT,
-    offset: CATEGORY_LIST_LIMIT * (current - 1)
+const Page = async () => {
+  const { contents: areaData } = await getAreaList({
+    limit: POST_LIST_LIMIT
   });
 
-  if(postData.length === 0) {
-    notFound();
-  }
+  // 釣果
+  const { contents: postData } = await getPostList({
+    limit: POST_LIST_LIMIT
+  });
 
+  // 魚種の設定
   const fullData = await getPostList({ limit: POST_LIST_LIMIT });
   const categoryData = await getCategoryList();
 
@@ -54,9 +40,8 @@ export default async function Page({ params }: Props) {
     <div className={styles.container}>
 
       <section className={styles.contents}>
-        <h1 className={styles.heading}>釣果</h1>
-        <PostList posts={postData} />
-        <Pagination totalCount={totalCount} current={current} />
+        <h1 className={styles.heading}>都道府県</h1>
+        <AreaList areas={areaData} postData={postData} />
       </section>
 
       <section id="category" className={`${categoryStyles.section} l-wrapper__over`}>
@@ -70,3 +55,5 @@ export default async function Page({ params }: Props) {
     </div>
   )
 }
+
+export default Page;

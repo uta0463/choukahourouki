@@ -10,6 +10,7 @@ import categoryStyles from "@/app/_components/CategoryList/index.module.scss"
 type Props = {
   params: Promise<{
     current: string;
+    areaSlug: string;
   }>;
 }
 
@@ -21,14 +22,17 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
+   // params の読み込みを待機
+  const { areaSlug } = await params;
+
+  // areaSlug をデコード
+  const decodedAreaSlug = decodeURIComponent(areaSlug);
+
   const { contents: postData, totalCount } = await getPostList({
     limit: CATEGORY_LIST_LIMIT,
+    filters: `area[equals]${decodedAreaSlug}`,
     offset: CATEGORY_LIST_LIMIT * (current - 1)
   });
-
-  if(postData.length === 0) {
-    notFound();
-  }
 
   const fullData = await getPostList({ limit: POST_LIST_LIMIT });
   const categoryData = await getCategoryList();
@@ -56,7 +60,7 @@ export default async function Page({ params }: Props) {
       <section className={styles.contents}>
         <h1 className={styles.heading}>釣果</h1>
         <PostList posts={postData} />
-        <Pagination totalCount={totalCount} current={current} />
+        <Pagination totalCount={totalCount} basePath={`/area/${areaSlug}`} />
       </section>
 
       <section id="category" className={`${categoryStyles.section} l-wrapper__over`}>
