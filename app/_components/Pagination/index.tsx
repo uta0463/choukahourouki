@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CATEGORY_LIST_LIMIT } from "@/app/_constants"
+import { SHOW_LIST_LIMIT } from "@/app/_constants"
 
 import styles from './index.module.scss'
 
@@ -15,7 +15,7 @@ export default function Pagination({
     basePath = "/get",
   }: Props) {
   const pages = Array.from({
-    length: Math.ceil(totalCount / CATEGORY_LIST_LIMIT)
+    length: Math.ceil(totalCount / SHOW_LIST_LIMIT)
   },
     (_, i) => i + 1
   );

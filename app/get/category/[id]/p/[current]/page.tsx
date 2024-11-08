@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getPostList, getCategoryList } from "@/app/_libs/microcms"
-import { POST_LIST_LIMIT, CATEGORY_LIST_LIMIT } from "@/app/_constants"
+import { POST_LIST_LIMIT, SHOW_LIST_LIMIT } from "@/app/_constants"
 import PostCategoryList from "@/app/_components/PosCategorytList"
 import CategoryList from "@/app/_components/CategoryList"
 import Pagination from "@/app/_components/Pagination"
@@ -40,9 +40,9 @@ export default async function Page({ params }: Props) {
 
   // 特定カテゴリーの投稿を取得
   const { contents: postData, totalCount } = await getPostList({
-    limit: CATEGORY_LIST_LIMIT,
+    limit: SHOW_LIST_LIMIT,
     filters: `category[equals]${id}`,
-    offset: CATEGORY_LIST_LIMIT * (current - 1)
+    offset: SHOW_LIST_LIMIT * (current - 1)
   });
 
   const fullData = await getPostList({ limit: POST_LIST_LIMIT });

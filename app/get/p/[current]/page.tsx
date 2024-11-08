@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getPostList, getCategoryList } from "@/app/_libs/microcms"
-import { POST_LIST_LIMIT, CATEGORY_LIST_LIMIT } from "@/app/_constants"
+import { POST_LIST_LIMIT, SHOW_LIST_LIMIT } from "@/app/_constants"
 import PostList from "@/app/_components/PostList"
 import CategoryList from "@/app/_components/CategoryList"
 import Pagination from "@/app/_components/Pagination"
@@ -22,8 +22,8 @@ export default async function Page({ params }: Props) {
   }
 
   const { contents: postData, totalCount } = await getPostList({
-    limit: CATEGORY_LIST_LIMIT,
-    offset: CATEGORY_LIST_LIMIT * (current - 1)
+    limit: SHOW_LIST_LIMIT,
+    offset: SHOW_LIST_LIMIT * (current - 1)
   });
 
   if(postData.length === 0) {
